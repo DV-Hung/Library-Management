@@ -1,0 +1,7 @@
+MS01,Nhập môn lập trình,200,Tiếng Việt,69000,10,2020,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS02,Kỹ thuật lập trình,220,Tiếng Việt,79000,15,2020,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS03,Lập trình hướng đối tượng,150,Tiếng Việt,119000,20,2017,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS04,Python Cookbook,150,Tiếng Anh,252000,5,2013,Giáo trình,David Beazley,Oreilly
+MS06,300 bài code thiếu nhi,100,Tiếng Việt,60000,11,2023,Sách bài tập,Trần Hữu Nam,Bình Định
+MS07,CTDL&GT với Java,120,Tiếng Việt,180000,5,2006,Giáo trình,Đoàn Thiện Ngân,Lao Động - Xã Hội
+MS008,Head First HTML5 Programming,339,Tiếng Anh,262500,4,2024,Giáo trình,Eric Freeman,Oreilly
