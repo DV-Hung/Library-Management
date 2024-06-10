@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import model.Book;
 
