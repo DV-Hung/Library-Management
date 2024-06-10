@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -34,13 +35,13 @@ public class MainFrame extends JFrame implements ActionListener {
     private static String punishmentPath = "C:\\Library-Management\\src\\fileData\\punishment.txt";
     private static String readerPath = "C:\\Library-Management\\src\\fileData\\reader.txt";
     private static String statisticPath = "C:\\Library-Management\\src\\fileData\\statistic.txt";
-    
+
     bookController bController = new bookController();
     readerController rController = new readerController();
     loanController lController = new loanController();
     punishmentController pController = new punishmentController();
     statisticController sController = new statisticController();
-    
+
     private Container container;
     private ButtonGroup buttonGroup;
     private DefaultTableModel tableModel;
@@ -50,7 +51,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private JButton btnSearchBook, btnAddBook, btnResetBook, btnUpdateBook, btnDeleteBook,
             btnCheckReaderID, btnCheckBookID, btnLoanBook, btnReturnBook, btnSearchLoan,
-            btnResetLoan, btnPunish, btnAddReader, btnUpdateReader, btnDeleteReader, btnResetReader, btnSearchReader, btnLoanList;
+            btnResetLoan, btnPunish, btnAddReader, btnUpdateReader, btnDeleteReader, btnResetReader, btnSearchReader, btnLoanList,
+            btnStatisticLaterBook, btnStatisticBorrowedBook;
     private JLabel lblBookName, lblPageNo, lblPrice, lblAmount, lblPublishYear,
             lblType, lblAuthor, lblPublisher, lblLanguage, lblReaderName, lblIdentityCard,
             lblPhoneNumber, lblPosition, lblSurname, lblReaderId, lblBookId, lblReturnAppointmentDate, lblSort,
@@ -101,7 +103,7 @@ public class MainFrame extends JFrame implements ActionListener {
         pnlBookManagement.setBounds(10, 41, 1166, 270);
         pnlBookManagement.setLayout(null);
 
-        lblBookID = new JLabel("Mã Sách: ");
+        lblBookID = new JLabel("Mã sách: ");
         lblBookName = new JLabel("Tên sách:");
         lblPageNo = new JLabel("Số trang:");
         lblLanguage = new JLabel("Ngôn ngữ:");
@@ -463,6 +465,13 @@ public class MainFrame extends JFrame implements ActionListener {
         lblStatisticLoan.setBounds(389, 89, 200, 28);
         lblStatisticPunish.setBounds(389, 127, 200, 28);
 
+        btnStatisticBorrowedBook = new JButton("Chi tiết");
+        btnStatisticLaterBook = new JButton("Chi tiết");
+        btnStatisticBorrowedBook.setBounds(610, 89, 100, 30);
+        btnStatisticLaterBook.setBounds(610, 127, 100, 30);
+
+        pnlStatistical.add(btnStatisticBorrowedBook);
+        pnlStatistical.add(btnStatisticLaterBook);
         pnlStatistical.add(lblStatisticTotalBook);
         pnlStatistical.add(lblStatisticTotalLoan);
         pnlStatistical.add(lblStatisticLoan);
@@ -482,7 +491,84 @@ public class MainFrame extends JFrame implements ActionListener {
                         lController.displayLoan(tableModel, table, loanList);
                         break;
                     case 3:
-                        sController.displayStatistic(tableModel, table, bookList, loanList, punishmentList);
+                        tableModel = new DefaultTableModel();
+                        table.setModel(tableModel);
+                        int soSach = 0,
+                         sachDangChoMuon = 0,
+                         sachBiTre = 0;
+                        for (Book book : bookList) {
+                            soSach += Integer.valueOf(book.getAmount());
+                        }
+                        for (Loan loan : loanList) {
+                            if (loan.getStatus().equalsIgnoreCase("Chưa trả")) {
+                                sachDangChoMuon += Integer.valueOf(loan.getLoanNo());
+                            }
+                        }
+                        for (Punishment punishment : punishmentList) {
+                            if (Integer.parseInt(punishment.getDaysLate()) > 0) {
+                                sachBiTre += Integer.valueOf(punishment.getLoanNo());
+                            }
+                        }
+                        btnStatisticBorrowedBook.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                tableModel = new DefaultTableModel();
+                                table.setModel(tableModel);
+                                tableModel.addColumn("Mã sách");
+                                tableModel.addColumn("Tên sách");
+                                tableModel.addColumn("Số trang");
+                                tableModel.addColumn("Ngôn ngữ");
+                                tableModel.addColumn("Giá");
+                                tableModel.addColumn("Số lượng");
+                                tableModel.addColumn("Năm xuất bản");
+                                tableModel.addColumn("Thể loại");
+                                tableModel.addColumn("Tác giả");
+                                tableModel.addColumn("Nhà xuất bản");
+                                for (Loan loan : loanList) {
+                                    for (Book book : bookList) {
+                                        if (loan.getStatus().equalsIgnoreCase("Chưa trả") && loan.getBookID().equalsIgnoreCase(book.getBookID())) {
+                                            tableModel.addRow(new Object[]{book.getBookID(), book.getBookName(), book.getPageNo(), book.getLanguage(), book.getPrice(),
+                                                loan.getLoanNo(), book.getPublishYear(), book.getType(), book.getAuthor(), book.getPublisher()});
+
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        btnStatisticLaterBook.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                tableModel = new DefaultTableModel();
+                                table.setModel(tableModel);
+                                tableModel.addColumn("Mã sách");
+                                tableModel.addColumn("Tên sách");
+                                tableModel.addColumn("Số trang");
+                                tableModel.addColumn("Ngôn ngữ");
+                                tableModel.addColumn("Giá");
+                                tableModel.addColumn("Số lượng");
+                                tableModel.addColumn("Năm xuất bản");
+                                tableModel.addColumn("Thể loại");
+                                tableModel.addColumn("Tác giả");
+                                tableModel.addColumn("Nhà xuất bản");
+                                for (Punishment punishment : punishmentList) {
+                                    if (Integer.parseInt(punishment.getDaysLate()) > 0) {
+                                        for (Book book : bookList) {
+                                            if (punishment.getBookID().equalsIgnoreCase(book.getBookID())) {
+                                                tableModel.addRow(new Object[]{book.getBookID(), book.getBookName(), book.getPageNo(), book.getLanguage(), book.getPrice(),
+                                                    punishment.getLoanNo(), book.getPublishYear(), book.getType(), book.getAuthor(), book.getPublisher()});
+
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        });
+                        lblStatisticTotalBook.setText("Tổng số sách: " + soSach);
+                        lblStatisticTotalLoan.setText("Tổng số phiếu mượn sách: " + loanList.size());
+                        lblStatisticLoan.setText("Tổng số sách đang cho mượn: " + sachDangChoMuon);
+                        lblStatisticPunish.setText("Tổng số sách bị trễ hạn trả: " + sachBiTre);
                         sController.ghiFileStatistic(statisticPath, table);
                         break;
                 }
@@ -1016,48 +1102,54 @@ public class MainFrame extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(container, "Thông tin không được để trống");
                         return;
                     }
-                    LocalDate ngayMuon = borrowedDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    LocalDate ngayHenTra = payAppoinmentDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    LocalDate ngayTra = payDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    long res1 = ChronoUnit.DAYS.between(ngayMuon, ngayTra);
-                    long res2 = ChronoUnit.DAYS.between(ngayHenTra, ngayTra);
-                    if (res1 < 0) {
-                        JOptionPane.showMessageDialog(container, "Ngày trả không hợp lệ");
-                        return;
-                    }
+
                     for (Loan loan : loanList) {
                         if (loan.getLoanID().equalsIgnoreCase(tfnewLoanId.getText()) && loan.getReaderID().equalsIgnoreCase(tfnewReaderID.getText()) && loan.getBookID().equalsIgnoreCase(tfnewBookID.getText())) {
-                            loan.setStatus("Đã trả");
-                            DateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                            loan.setBookReturnDate(newDateFormat.format(payDate.getDate()));
-                            for (Book book : bookList) {
-                                if (book.getBookID().equalsIgnoreCase(tfnewBookID.getText())) {
-                                    book.setAmount(String.valueOf(Integer.valueOf(book.getAmount()) + Integer.valueOf(loan.getLoanNo())));
-                                    break;
+                            SimpleDateFormat dinhDang = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date date1 = dinhDang.parse(loan.getBookReturnAppointmentDate());
+                                Date date2 = payDate.getCalendar().getTime();
+
+                                long diffInMillis = Math.abs(date2.getTime() - date1.getTime());
+                                long diff = diffInMillis / (24 * 60 * 60 * 1000);
+                                if (diff < 0) {
+                                    JOptionPane.showMessageDialog(container, "Ngày trả không hợp lệ");
+                                    return;
                                 }
-                            }
-                            if (res2 > 0) {
-                                String fullName = "", nameBook = "";
-                                for (model.Reader reader : readerList) {
-                                    if (reader.getReaderID().equalsIgnoreCase(tfnewReaderID.getText())) {
-                                        fullName += reader.getSurname() + " " + reader.getName();
-                                        break;
-                                    }
-                                }
+                                loan.setStatus("Đã trả");
+                                DateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                loan.setBookReturnDate(newDateFormat.format(payDate.getDate()));
                                 for (Book book : bookList) {
                                     if (book.getBookID().equalsIgnoreCase(tfnewBookID.getText())) {
-                                        nameBook = book.getBookName();
+                                        book.setAmount(String.valueOf(Integer.valueOf(book.getAmount()) + Integer.valueOf(loan.getLoanNo())));
                                         break;
                                     }
                                 }
-                                punishmentList.add(new Punishment(tfLoanID.getText(), tfnewReaderID.getText(),
-                                        fullName, tfnewBookID.getText(), nameBook, tfLoanNO.getText(), String.valueOf(res2), String.valueOf(2000 * res2), loan.getStatus()));
-                                pController.ghiFilePunishment(punishmentPath, punishmentList);
+                                if (diff > 0) {
+                                    String fullName = "", nameBook = "";
+                                    for (model.Reader reader : readerList) {
+                                        if (reader.getReaderID().equalsIgnoreCase(tfnewReaderID.getText())) {
+                                            fullName += reader.getSurname() + " " + reader.getName();
+                                            break;
+                                        }
+                                    }
+                                    for (Book book : bookList) {
+                                        if (book.getBookID().equalsIgnoreCase(tfnewBookID.getText())) {
+                                            nameBook = book.getBookName();
+                                            break;
+                                        }
+                                    }
+                                    punishmentList.add(new Punishment(tfnewLoanId.getText(), tfnewReaderID.getText(),
+                                            fullName, tfnewBookID.getText(), nameBook, loan.getLoanNo(), String.valueOf(diff), String.valueOf(2000 * diff), loan.getStatus()));
+                                    pController.ghiFilePunishment(punishmentPath, punishmentList);
+                                }
+                                lController.displayLoan(tableModel, table, loanList);
+                                lController.ghiFileLoan(loanPath, loanList);
+                                inputForm.setVisible(false);
+                                return;
+                            } catch (ParseException ex) {
+                                System.out.println("Lỗi: " + ex.getMessage());
                             }
-                            lController.displayLoan(tableModel, table, loanList);
-                            lController.ghiFileLoan(loanPath, loanList);
-                            inputForm.setVisible(false);
-                            return;
                         }
 
                     }
@@ -1097,7 +1189,7 @@ public class MainFrame extends JFrame implements ActionListener {
             tfLoanSearch.setText(null);
         }
     }
-    
+
     public static void main(String[] args) throws IOException {
         MainFrame mainFrame = new MainFrame();
     }
