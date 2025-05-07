@@ -1,0 +1,25 @@
+MS01,Nhập môn lập trình,200,Tiếng Việt,69000,10,2020,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS02,Kỹ thuật lập trình,220,Tiếng Việt,79000,15,2020,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS03,Lập trình hướng đối tượng,150,Tiếng Việt,119000,20,2017,Giáo trình,Trần Đan Thư,Đại Học KHTN
+MS04,Python Cookbook,150,Tiếng Anh,252000,5,2013,Giáo trình,David Beazley,Oreilly
+MS06,300 bài code thiếu nhi,100,Tiếng Việt,60000,11,2023,Sách bài tập,Trần Hữu Nam,Bình Định
+MS07,CTDL&GT với Java,120,Tiếng Việt,180000,5,2006,Giáo trình,Đoàn Thiện Ngân,Lao Động - Xã Hội
+MS08,Head First HTML5 Programming,339,Tiếng Anh,262500,4,2024,Giáo trình,Eric Freeman,Oreilly
+MS09,Kiến trúc máy tính,220,Tiếng Việt,84000,19,2013,Giáo trình,Nguyễn Đình Việt,Đại Học Quốc Gia Hà Nội
+MS10,Hệ điều hành,326,Tiếng Việt,91350,21,2013,Giáo trình,Trần Trung Dũng,Khoa Học và Kỹ Thuật
+MS11,Cơ sở dữ liệu,197,Tiếng Việt,63000,35,2013,Giáo trình,Đồng Thị Bích Thúy,Khoa Học và Kỹ Thuật
+MS12,Phân tích thiết kế hệ thống,500,Tiếng Việt,105000,46,2016,Giáo trình,Phạm Nguyễn Cương,Khoa Học Và Kỹ Thuật
+MS13,ASP.NET Core in Action,712,Tiếng Anh,262500,11,2017,Giáo trình,Andrew Lock,Manning
+MS14,Hacking Và Kỹ Thuật Xâm Nhập Máy Tính,448,Tiếng Việt,105000,45,2007,Giáo trình,Lê Thanh Tuấn,Giao Thông Vận Tải
+MS15,Toán rời rạc,300,Tiếng Việt,90000,21,2024,Giáo trình,Nguyễn Đức Nghĩa ,Đại Học Quốc Gia Hà Nội
+MS16,Fluent Python,431,Tiếng Anh,300000,21,2022,Giáo trình,Luciano Ramalho,Oreilly
+MS17,How Linux Works,211,Tiếng Anh,184250,33,2024,Giáo trình,Brian Ward,Oreilly
+MS18,Head First Design Patterns,694,Tiếng Anh,315000,11,2024,Giáo trình,Eric Freeman,Oreilly
+MS19,Linear Algebra,178,Tiếng Anh,210000,51,2014,Giáo trình,Mike X Cohen,sincXpress
+MS20,C++ Primer,274,Tiếng Anh,315000,72,2014,Giáo trình,Stanley B.Lippman,Standard
+MS21,Developing 2D Games with Unity,457,Tiếng Anh,168000,23,2024,Giáo trình,Jared Halpern,Apress
+MS22,An toàn thông tin,323,Tiếng Việt,84000,39,2017,Giáo trình,Lê Văn Phùng,Thông Tin và Truyền Thông
+MS23,Kiểm Thử Cơ Bản,327,Tiếng Việt,126000,17,2024,Giáo trình,Rex Black,Đại Học Bách Khoa Hà Nội
+MS24,Các kỹ thuật chuyển đổi mô hình và sinh mã trong phát triển ứng dụng web hướng mô hình,68,Tiếng Việt,0,1,2021,Luận án,Trần Đình Diện,Đại Học Bách Khoa Hà Nội
+MS25,Mô hình đánh giá độ tin cậy hệ thống phần mềm,103,Tiếng Việt,0,1,2015,Luận án,Nguyễn Hùng Cường,Đại Học Bách Khoa Hà Nội
+MS26,Giải tích,171,Tiếng Việt,147000,17,2018,Sách bài tập,James Stewart,Hồng Đức

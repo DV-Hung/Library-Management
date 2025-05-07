@@ -1,0 +1,4 @@
+MS01,Cấu trúc dữ liệu,120,Tiếng Việt,120000,10,2024,Giáo trình,Đỗ Xuân Lôi,2024
+MS02,Toán rời rạc,200,Tiếng Việt,150000,20,2020,Giáo trình,Đỗ Xuân Lôi,2020
+MS03,Hệ điều hành,120,Tiếng Anh,50000,12,2018,Giáo trình,Mai Tất Duy,2018
+MS04,Vật lý,60,Tiếng Việt,60000,12,2024,Giáo trình,Nguyễn Văn A,2024
